@@ -1,4 +1,4 @@
-package com.openjitsu.openjitsu
+package com.openjitsu.android.openjitsu
 
 import org.junit.Test
 

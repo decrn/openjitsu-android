@@ -46,7 +46,7 @@ class RegisterFragment : Fragment() {
 
     // TODO: Rename method, update argument and hook method into UI event
     fun onButtonPressed(uri: Uri) {
-            listener?.onFragmentInteraction(uri)
+        listener?.onFragmentInteraction(uri)
     }
 
     override fun onAttach(context: Context) {
@@ -89,7 +89,8 @@ class RegisterFragment : Fragment() {
          * @return A new instance of fragment RegisterFragment.
          */
         // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
                 RegisterFragment().apply {
                     arguments = Bundle().apply {
                         putString(ARG_PARAM1, param1)

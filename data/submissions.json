@@ -1,0 +1,68 @@
+[
+    {
+        "id": "1",
+        "name": "Armbar",
+        "description": "This is an armbar description.",
+        "image": "https://picsum.photos/300/300/?image=1",
+        "content": "Armbars are fun. Exercitation ipsum mollit eiusmod velit minim sit nulla eiusmod aliquip deserunt duis. Commodo adipisicing pariatur enim do incididunt non adipisicing qui. Eiusmod ad do adipisicing reprehenderit. Non amet ipsum nostrud velit reprehenderit fugiat nostrud consequat ut laboris laborum voluptate.",
+        "related": [
+
+        ],
+        "comments": [
+            {
+                "id": "a1",
+                "username": "tuur",
+                "timestamp": 1546200606,
+                "content": "Wow this is a really great submission!"
+            }
+        ]
+    },
+    {
+        "id": "2",
+        "name": "Ezekiel choke",
+        "description": "This is an ezekiel choke description.",
+        "image": "https://picsum.photos/300/300/?image=2",
+        "content": "Ezekiel is cool. Exercitation ipsum mollit eiusmod velit minim sit nulla eiusmod aliquip deserunt duis. Commodo adipisicing pariatur enim do incididunt non adipisicing qui. Eiusmod ad do adipisicing reprehenderit. Non amet ipsum nostrud velit reprehenderit fugiat nostrud consequat ut laboris laborum voluptate.",
+        "related": [
+
+        ],
+        "comments": [
+            {
+                "id": "a2",
+                "username": "jonathan",
+                "timestamp": 1546205606,
+                "content": "I really like dancing with the stars."
+            },
+            {
+                "id": "a3",
+                "username": "meghan",
+                "timestamp": 1544205606,
+                "content": "I enjoy bringing the Ezekiel."
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "name": "D'arce choke",
+        "description": "This is an d'arce choke description.",
+        "image": "https://picsum.photos/300/300/?image=3",
+        "content": "D'arce is for the weak. Exercitation ipsum mollit eiusmod velit minim sit nulla eiusmod aliquip deserunt duis. Commodo adipisicing pariatur enim do incididunt non adipisicing qui. Eiusmod ad do adipisicing reprehenderit. Non amet ipsum nostrud velit reprehenderit fugiat nostrud consequat ut laboris laborum voluptate.",
+        "related": [
+
+        ],
+        "comments": [
+            {
+                "id": "a4",
+                "username": "julia",
+                "timestamp": 1546202206,
+                "content": "How old is a newborn baby? I think not old at all..."
+            },
+            {
+                "id": "a5",
+                "username": "stephanie",
+                "timestamp": 1534205606,
+                "content": "I don't know how to navigate this app."
+            }
+        ]
+    }
+]

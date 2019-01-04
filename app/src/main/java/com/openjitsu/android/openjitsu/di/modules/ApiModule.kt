@@ -1,4 +1,4 @@
-package com.openjitsu.android.openjitsu.di
+package com.openjitsu.android.openjitsu.di.modules
 
 import android.util.Log
 import com.openjitsu.android.openjitsu.data.Api

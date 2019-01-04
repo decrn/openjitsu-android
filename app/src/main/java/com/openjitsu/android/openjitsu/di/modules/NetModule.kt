@@ -1,6 +1,5 @@
-package com.openjitsu.android.openjitsu.di
+package com.openjitsu.android.openjitsu.di.modules
 
-import com.openjitsu.android.openjitsu.data.Api
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

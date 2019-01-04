@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
 import com.openjitsu.android.openjitsu.data.Api
 import com.openjitsu.android.openjitsu.models.Position
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.explore_detail.view.*
+import javax.inject.Inject
 
 /**
  * A fragment representing a single Explore detail screen.
@@ -21,7 +23,11 @@ import kotlinx.android.synthetic.main.explore_detail.view.*
  */
 class ExploreDetailFragment : Fragment() {
 
+    @Inject
+    lateinit var api : Api
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Application.appComponent.inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -33,7 +39,7 @@ class ExploreDetailFragment : Fragment() {
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
                 Log.i("data", "ARG_ITEM_ID " + it.getString(ARG_ITEM_ID))
-                Api.create().getPositionById(it.getString(ARG_ITEM_ID))
+                api.getPositionById(it.getString(ARG_ITEM_ID))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(

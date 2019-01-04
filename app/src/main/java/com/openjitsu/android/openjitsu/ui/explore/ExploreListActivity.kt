@@ -13,7 +13,11 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_explore_list.*
 import kotlinx.android.synthetic.main.explore_list.*
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.models.ExploreItem
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import javax.inject.Inject
 
 
 /**
@@ -26,15 +30,27 @@ import com.openjitsu.android.openjitsu.models.ExploreItem
  */
 class ExploreListActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var api : Api
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private var twoPane: Boolean = false
 
+    /**
+     * CompositeDisposable to help manage subscriptions when the Activity is closed
+     * to prevent memory leaks
+     */
+    private var compositeDisposable: CompositeDisposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_explore_list)
+
+        // Inject the dependencies
+        Application.appComponent.inject(this)
 
         setSupportActionBar(toolbar)
         toolbar.title = title
@@ -53,22 +69,27 @@ class ExploreListActivity : AppCompatActivity() {
         }
 
         explore_list.layoutManager = LinearLayoutManager(this)
+        var adapter = ExploreItemRecyclerViewAdapter(this, emptyList(), this.twoPane)
+        Application.appComponent.inject(adapter)
 
-        explore_list.adapter = ExploreItemRecyclerViewAdapter(this, emptyList(), this.twoPane)
+        var positions: List<Position>
 
-        Api.create().getAllPositions()
+        api.getAllPositions()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { list ->
-                            Log.i("data", "Successfully loaded data")
-                            val positionList = list.toList()
-                            (explore_list.adapter as ExploreItemRecyclerViewAdapter).replaceItems(positionList)
-                        },
-                        {
-                            Log.e("data", "Failed to load data")
-                            // Catch error
-                        }
+                            Log.i("openjitsu/data", "data was loaded successfully!")
+                            adapter.replaceItems(list)
+                        },Throwable::printStackTrace
                 )
+                .addTo(compositeDisposable)
+
+
+        explore_list.adapter = adapter
+    }
+
+    fun onClose() {
+        compositeDisposable.dispose()
     }
 }

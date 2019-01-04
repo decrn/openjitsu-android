@@ -5,9 +5,12 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
+import com.openjitsu.android.openjitsu.data.Api
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
 import kotlinx.android.synthetic.main.activity_explore_detail.*
+import javax.inject.Inject
 
 /**
  * An activity representing a single Explore detail screen. This

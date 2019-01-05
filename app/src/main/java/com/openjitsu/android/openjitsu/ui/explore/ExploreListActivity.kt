@@ -6,18 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.openjitsu.android.openjitsu.R
 import com.openjitsu.android.openjitsu.data.network.Api
-import com.openjitsu.android.openjitsu.data.network.response.Position
 
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_explore_list.*
 import kotlinx.android.synthetic.main.explore_list.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openjitsu.android.openjitsu.Application
-import com.openjitsu.android.openjitsu.data.network.response.ExploreItem
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

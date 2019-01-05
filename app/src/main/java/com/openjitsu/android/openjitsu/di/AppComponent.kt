@@ -2,6 +2,7 @@ package com.openjitsu.android.openjitsu.di
 
 import android.app.Application
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
+import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import com.openjitsu.android.openjitsu.di.modules.ApiModule
 import com.openjitsu.android.openjitsu.di.modules.AppModule
 import com.openjitsu.android.openjitsu.di.modules.DatabaseModule
@@ -35,6 +36,8 @@ interface AppComponent {
     fun inject(exploreDetailActivity: ExploreDetailActivity)
 
     fun inject(positionRepository: PositionRepository)
+
+    fun inject(submissionRepository: SubmissionRepository)
 
     companion object Factory {
         fun create(app: Application, baseUrl: String): AppComponent {

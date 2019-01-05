@@ -4,11 +4,11 @@ import android.util.Log
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.data.db.Dao
 import com.openjitsu.android.openjitsu.data.network.Api
-import com.openjitsu.android.openjitsu.data.models.Position
+import com.openjitsu.android.openjitsu.data.models.Submission
 import com.openjitsu.android.openjitsu.util.NoConnectivityException
 import javax.inject.Inject
 
-class PositionRepository @Inject constructor(private val api: Api) {
+class SubmissionRepository @Inject constructor(private val api: Api) {
 
     @Inject
     lateinit var dao: Dao
@@ -18,15 +18,15 @@ class PositionRepository @Inject constructor(private val api: Api) {
     }
 
     // @SuppressLint("CheckResult")
-    suspend fun getAllPositions(): List<Position> {
+    suspend fun getAllSubmissions(): List<Submission> {
         return try {
-            Log.i("openjitsu/repo", "Attempting to get from Positions Repository...")
-            val items = api.getAllPositions().await()
-            dao.insertPositions(items)
+            Log.i("openjitsu/repo", "Attempting to get from Submissions Repository...")
+            val items = api.getAllSubmissions().await()
+            dao.insertSubmissions(items)
             items
         } catch (e: NoConnectivityException) {
-            Log.i("openjitsu/repo", "No network connectivity, returning saved positions")
-            dao.getAllPositions()
+            Log.i("openjitsu/repo", "No network connectivity, returning saved submissions")
+            dao.getAllSubmissions()
         }
     }
 }

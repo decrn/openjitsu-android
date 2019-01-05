@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.openjitsu.android.openjitsu.R
-import com.openjitsu.android.openjitsu.data.network.response.ExploreItem
+import com.openjitsu.android.openjitsu.data.models.ExploreItem
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
 import kotlinx.android.synthetic.main.explore_list_content.view.*
 

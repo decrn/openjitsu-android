@@ -20,7 +20,5 @@ interface Dao {
     fun getAllSubmissions(): List<Submission>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSubmissions(items: List<Submission>) {
-
-    }
+    fun insertSubmissions(items: List<Submission>)
 }

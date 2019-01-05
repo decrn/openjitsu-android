@@ -1,5 +1,6 @@
 package com.openjitsu.android.openjitsu.data.repositories
 
+import android.content.SharedPreferences
 import android.util.Log
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.data.db.Dao
@@ -13,6 +14,9 @@ class PositionRepository @Inject constructor(private val api: Api) {
     @Inject
     lateinit var dao: Dao
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     init {
         Application.appComponent.inject(this)
     }
@@ -22,7 +26,10 @@ class PositionRepository @Inject constructor(private val api: Api) {
         return try {
             Log.i("openjitsu/repo", "Attempting to get from Positions Repository...")
             val items = api.getAllPositions().await()
-            dao.insertPositions(items)
+            if(sharedPreferences.getBoolean("submissions_db_inserted", true)) {
+                dao.insertPositions(items)
+                sharedPreferences.edit().putBoolean("", false).apply()
+            }
             items
         } catch (e: NoConnectivityException) {
             Log.i("openjitsu/repo", "No network connectivity, returning saved positions")

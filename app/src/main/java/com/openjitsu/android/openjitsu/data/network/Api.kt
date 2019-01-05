@@ -1,7 +1,7 @@
 package com.openjitsu.android.openjitsu.data.network
 
-import com.openjitsu.android.openjitsu.data.network.response.Position
-import com.openjitsu.android.openjitsu.data.network.response.Submission
+import com.openjitsu.android.openjitsu.data.models.Position
+import com.openjitsu.android.openjitsu.data.models.Submission
 import io.reactivex.Single
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
@@ -19,5 +19,5 @@ interface Api {
     fun getPositionById(@Path("id") id: String): Single<Position>
 
     @GET("submissions")
-    fun getAllSubmissions(): Single<List<Submission>>
+    fun getAllSubmissions(): Deferred<List<Submission>>
 }

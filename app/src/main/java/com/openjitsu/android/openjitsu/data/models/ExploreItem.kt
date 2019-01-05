@@ -1,4 +1,4 @@
-package com.openjitsu.android.openjitsu.data.network.response
+package com.openjitsu.android.openjitsu.data.models
 
 interface ExploreItem {
     val id: String

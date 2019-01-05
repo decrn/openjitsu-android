@@ -1,11 +1,13 @@
-package com.openjitsu.android.openjitsu.data.network.response
+package com.openjitsu.android.openjitsu.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.openjitsu.android.openjitsu.data.network.response.ExploreItem
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "positions")
 data class Position(
-        override val id: String,
+        @PrimaryKey override val id: String,
         override val name: String,
         override val description: String,
         override val image: String,

@@ -14,8 +14,14 @@ import kotlinx.android.synthetic.main.activity_explore_list.*
 import kotlinx.android.synthetic.main.explore_list.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openjitsu.android.openjitsu.Application
+import com.openjitsu.android.openjitsu.data.network.response.ExploreItem
+import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -31,6 +37,9 @@ class ExploreListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var api : Api
+
+    @Inject
+    lateinit var positionRepository: PositionRepository
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -68,22 +77,18 @@ class ExploreListActivity : AppCompatActivity() {
         }
 
         explore_list.layoutManager = LinearLayoutManager(this)
-        var adapter = ExploreItemRecyclerViewAdapter(this, emptyList(), this.twoPane)
+        val adapter = ExploreItemRecyclerViewAdapter(this, emptyList(), this.twoPane)
         Application.appComponent.inject(adapter)
 
-        var positions: List<Position>
-
-        api.getAllPositions()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { list ->
-                            Log.i("openjitsu/data", "data was loaded successfully!")
-                            adapter.replaceItems(list)
-                        },Throwable::printStackTrace
-                )
-                .addTo(compositeDisposable)
-
+        CoroutineScope(Dispatchers.Main).launch {
+            val items = withContext(Dispatchers.IO) {
+                positionRepository.getAllPositions()
+            }
+            items.run {
+                Log.i("openjitsu/data", "Found " + items.size + " items!")
+                adapter.replaceItems(items)
+            }
+        }
 
         explore_list.adapter = adapter
     }

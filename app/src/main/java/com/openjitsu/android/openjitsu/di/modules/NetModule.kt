@@ -1,6 +1,7 @@
 package com.openjitsu.android.openjitsu.di.modules
 
 import android.content.Context
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.openjitsu.android.openjitsu.util.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
@@ -56,7 +57,7 @@ class NetModule(private val baseUrl: String) {
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(gson)
-                .addCallAdapterFactory(rxJava)
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .client(okHttpClient)
                 .build()
     }

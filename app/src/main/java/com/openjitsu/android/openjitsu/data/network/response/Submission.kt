@@ -1,7 +1,8 @@
-package com.openjitsu.android.openjitsu.models
+package com.openjitsu.android.openjitsu.data.network.response
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.openjitsu.android.openjitsu.data.network.response.ExploreItem
 
 data class Submission(
         override val id: String,
@@ -15,13 +16,13 @@ data class Submission(
 
     // Parcelable
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()
-//            parcel.readString(),
-//            parcel.readString()
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+//        parcel.readString(),
+//        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

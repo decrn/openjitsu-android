@@ -1,7 +1,7 @@
 package com.openjitsu.android.openjitsu.di.modules
 
 import android.util.Log
-import com.openjitsu.android.openjitsu.data.Api
+import com.openjitsu.android.openjitsu.data.network.Api
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

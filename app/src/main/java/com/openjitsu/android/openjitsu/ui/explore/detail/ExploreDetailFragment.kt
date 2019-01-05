@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
-import com.openjitsu.android.openjitsu.data.Api
-import com.openjitsu.android.openjitsu.models.Position
+import com.openjitsu.android.openjitsu.data.network.Api
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.explore_detail.view.*

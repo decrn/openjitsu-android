@@ -1,5 +1,7 @@
 package com.openjitsu.android.openjitsu.di.modules
 
+import android.content.Context
+import com.openjitsu.android.openjitsu.util.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -23,14 +25,23 @@ class NetModule(private val baseUrl: String) {
 
     @Provides
     @Singleton
+    fun provideOfflineInterceptor(context: Context): NetworkInterceptor {
+        return NetworkInterceptor(context)
+    }
+
+    @Provides
+    @Singleton
     fun provideGson(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
     @Provides
     @Singleton
-    fun provideOKhttpClient(logger: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(logger).build()
+    fun provideOKhttpClient(logger: HttpLoggingInterceptor, offlineInterceptor: NetworkInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+                .addInterceptor(logger)
+                .addInterceptor(offlineInterceptor)
+                .build()
     }
 
     @Provides

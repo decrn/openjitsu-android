@@ -1,6 +1,9 @@
 package com.openjitsu.android.openjitsu.di
 
+import android.app.Application
 import com.openjitsu.android.openjitsu.di.modules.ApiModule
+import com.openjitsu.android.openjitsu.di.modules.AppModule
+import com.openjitsu.android.openjitsu.di.modules.DatabaseModule
 import com.openjitsu.android.openjitsu.di.modules.NetModule
 import com.openjitsu.android.openjitsu.ui.explore.ExploreDetailActivity
 import com.openjitsu.android.openjitsu.ui.explore.ExploreItemRecyclerViewAdapter
@@ -13,7 +16,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApiModule::class, NetModule::class])
+@Component(modules = [ApiModule::class, NetModule::class, AppModule::class])
 interface AppComponent {
 
     fun inject(exploreItemRecyclerViewAdapter: ExploreItemRecyclerViewAdapter)
@@ -31,8 +34,14 @@ interface AppComponent {
     fun inject(exploreDetailActivity: ExploreDetailActivity)
 
     companion object Factory {
-        fun create(baseUrl: String): AppComponent {
-            return DaggerAppComponent.builder().apiModule(ApiModule()).netModule(NetModule(baseUrl)).build()
+        fun create(app: Application, baseUrl: String): AppComponent {
+            return DaggerAppComponent
+                    .builder()
+                    .appModule(AppModule(app))
+                    .apiModule(ApiModule())
+                    .netModule(NetModule(baseUrl))
+                    .databaseModule(DatabaseModule())
+                    .build()
         }
     }
 }

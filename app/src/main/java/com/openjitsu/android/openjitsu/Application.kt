@@ -11,7 +11,7 @@ class Application: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = AppComponent.create("https://gist.githubusercontent.com/decrn/9333d4c9fc9bab3084964d053b708561/raw/")
+        appComponent = AppComponent.create(this,"https://gist.githubusercontent.com/decrn/9333d4c9fc9bab3084964d053b708561/raw/")
     }
 
 

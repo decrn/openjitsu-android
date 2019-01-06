@@ -9,8 +9,7 @@ The app is built as per the specifications for **Native Apps 1: Android**, and u
 * **Dagger2** for Dependency Injection
 * **Retrofit2** with the **OkHttp3** client for HTTP/network functionality
 * **Room2** for local persistence
-* ...
-
+* **Espresso** for instrumented e2e testing
 
 ## Installation
 
@@ -22,8 +21,8 @@ git clone https://github.com/decrn/openjitsu-android openjitsu-android
 
 ## Running
 
-*TODO: Expand this section*
-
+MinSDK level 19, TargetSDK level 28.
+Run with Android Studio >= 3.2
 
 ## Maintainers
 
@@ -34,7 +33,7 @@ This project is mantained by:
 ## Contributing
 
 1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -m 'Add some feature')
-5. Push your branch (git push origin my-new-feature)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+5. Push your branch (`git push origin my-new-feature`)
 6. Create a new Pull Request

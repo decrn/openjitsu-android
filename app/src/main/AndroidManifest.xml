@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".ui.explore.ExploreListActivity"
-            android:label="@string/title_explore_list"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

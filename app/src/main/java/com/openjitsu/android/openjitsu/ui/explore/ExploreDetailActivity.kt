@@ -1,12 +1,14 @@
 package com.openjitsu.android.openjitsu.ui.explore
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.openjitsu.android.openjitsu.R
+import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
+import com.openjitsu.android.openjitsu.ui.explore.detail.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_explore_detail.*
 
 /**
@@ -15,17 +17,15 @@ import kotlinx.android.synthetic.main.activity_explore_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ExploreListActivity].
  */
-class ExploreDetailActivity : AppCompatActivity() {
+class ExploreDetailActivity : AppCompatActivity(), CommentFragment.OnListFragmentInteractionListener {
+    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_explore_detail)
         setSupportActionBar(detail_toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,7 +42,14 @@ class ExploreDetailActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = ExploreDetailFragment().apply {
+            val contentFragment = ExploreDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ExploreDetailFragment.ARG_ITEM_ID,
+                            intent.getStringExtra(ExploreDetailFragment.ARG_ITEM_ID))
+                }
+            }
+
+            val commentFragment = CommentFragment().apply {
                 arguments = Bundle().apply {
                     putString(ExploreDetailFragment.ARG_ITEM_ID,
                             intent.getStringExtra(ExploreDetailFragment.ARG_ITEM_ID))
@@ -50,7 +57,8 @@ class ExploreDetailActivity : AppCompatActivity() {
             }
 
             supportFragmentManager.beginTransaction()
-                    .add(R.id.explore_detail_container, fragment)
+                    .add(R.id.explore_detail_container, contentFragment)
+                    .add(R.id.comment_list, commentFragment)
                     .commit()
         }
     }

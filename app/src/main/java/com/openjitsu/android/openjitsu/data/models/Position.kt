@@ -11,9 +11,9 @@ data class Position(
         override val name: String,
         override val description: String,
         override val image: String,
-        override val content: String
+        override val content: String,
+        val comments: Comment[]
 //        val related: String[],
-//        val comments: Comment[]
 ) : Parcelable, ExploreItem {
 
     // Parcelable
@@ -22,9 +22,9 @@ data class Position(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+            parcel.readString()
 //        parcel.readString(),
-//        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -33,8 +33,8 @@ data class Position(
         parcel.writeString(description)
         parcel.writeString(image)
         parcel.writeString(content)
+        parcel.writeString(comments.cr)
 //        parcel.writeString(related)
-//        parcel.writeString(comments)
     }
 
     override fun describeContents(): Int {

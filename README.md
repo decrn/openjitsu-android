@@ -8,7 +8,7 @@ The app is built as per the specifications for **Native Apps 1: Android**, and u
 * **Glide** for image loading and caching
 * **Dagger2** for Dependency Injection
 * **Retrofit2** with the **OkHttp3** client for HTTP/network functionality
-* // TODO: Expand this
+* **Room2** for local persistence
 * ...
 
 

@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
 import com.openjitsu.android.openjitsu.data.network.Api
+import com.openjitsu.android.openjitsu.data.repositories.CommentRepository
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers

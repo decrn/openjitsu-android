@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.openjitsu.android.openjitsu.R
+import com.openjitsu.android.openjitsu.data.models.Comment
+import com.openjitsu.android.openjitsu.data.models.ExploreItem
 
 
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment.OnListFragmentInteractionListener
-import com.openjitsu.android.openjitsu.ui.explore.detail.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_comment.view.*
 
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_comment.view.*
  * TODO: Replace the implementation with code for your data type.
  */
 class CommentRecyclerViewAdapter(
-        private val mValues: List<DummyItem>,
+        private var mValues: List<Comment>,
         private val mListener: OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
 
@@ -27,7 +28,7 @@ class CommentRecyclerViewAdapter(
 
     init {
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
+            val item = v.tag as Comment
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
             mListener?.onListFragmentInteraction(item)
@@ -52,6 +53,11 @@ class CommentRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int = mValues.size
+
+    fun replaceItems(commentsList: List<Comment>) {
+        this.mValues = commentsList
+        this.notifyDataSetChanged()
+    }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mIdView: TextView = mView.item_number

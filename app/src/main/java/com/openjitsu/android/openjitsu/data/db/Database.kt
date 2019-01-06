@@ -2,11 +2,12 @@ package com.openjitsu.android.openjitsu.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.data.models.Position
 import com.openjitsu.android.openjitsu.data.models.Submission
 
 @Database(
-        entities = [Position::class, Submission::class],
+        entities = [Position::class, Submission::class, Comment::class],
         version = 1,
         exportSchema = false
 )

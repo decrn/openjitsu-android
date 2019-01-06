@@ -1,14 +1,13 @@
 package com.openjitsu.android.openjitsu.ui.explore
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.openjitsu.android.openjitsu.R
+import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
-import com.openjitsu.android.openjitsu.ui.explore.detail.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_explore_detail.*
 
 /**
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_explore_detail.*
  * in a [ExploreListActivity].
  */
 class ExploreDetailActivity : AppCompatActivity(), CommentFragment.OnListFragmentInteractionListener {
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
+    override fun onListFragmentInteraction(item: Comment?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

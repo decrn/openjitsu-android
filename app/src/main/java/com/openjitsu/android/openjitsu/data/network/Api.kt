@@ -1,5 +1,6 @@
 package com.openjitsu.android.openjitsu.data.network
 
+import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.data.models.Position
 import com.openjitsu.android.openjitsu.data.models.Submission
 import kotlinx.coroutines.Deferred
@@ -19,4 +20,7 @@ interface Api {
 
     @GET("submissions")
     fun getAllSubmissions(): Deferred<List<Submission>>
+
+    @GET("comments_{id}")
+    fun getCommentsByPositionId(@Path("id") id: String): Deferred<List<Comment>>
 }

@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Room
 import com.openjitsu.android.openjitsu.data.db.Dao
 import com.openjitsu.android.openjitsu.data.db.Database
+import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.data.models.Position
 import com.openjitsu.android.openjitsu.data.network.Api
+import com.openjitsu.android.openjitsu.data.repositories.CommentRepository
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import dagger.Module
@@ -32,6 +34,12 @@ class DataModule {
     @Provides
     fun provideSubmissionRepository(): SubmissionRepository {
         return SubmissionRepository()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCommentRepository(): CommentRepository {
+        return CommentRepository()
     }
 
     @Provides

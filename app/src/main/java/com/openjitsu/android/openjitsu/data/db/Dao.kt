@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.data.models.Position
 import com.openjitsu.android.openjitsu.data.models.Submission
 
@@ -24,4 +25,7 @@ interface Dao {
 
     @Query("select * from positions where id = :id LIMIT 1")
     fun getPositionById(id: String): Position
+
+    @Query("select * from comments where positionId = :id")
+    fun getCommentsByPositionId(id: String): List<Comment>
 }

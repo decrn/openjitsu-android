@@ -11,8 +11,8 @@ data class Position(
         override val name: String,
         override val description: String,
         override val image: String,
-        override val content: String,
-        val comments: Comment[]
+        override val content: String
+//        val comments: Comment[]
 //        val related: String[],
 ) : Parcelable, ExploreItem {
 
@@ -22,8 +22,8 @@ data class Position(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
-            parcel.readString()
+        parcel.readString()
+//            parcel.readString()
 //        parcel.readString(),
     )
 
@@ -33,7 +33,7 @@ data class Position(
         parcel.writeString(description)
         parcel.writeString(image)
         parcel.writeString(content)
-        parcel.writeString(comments.cr)
+//        parcel.writeString(comments.cr)
 //        parcel.writeString(related)
     }
 

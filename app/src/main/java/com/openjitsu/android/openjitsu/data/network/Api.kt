@@ -2,7 +2,6 @@ package com.openjitsu.android.openjitsu.data.network
 
 import com.openjitsu.android.openjitsu.data.models.Position
 import com.openjitsu.android.openjitsu.data.models.Submission
-import io.reactivex.Single
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,7 +15,7 @@ interface Api {
 
     // TODO: Update this _ to slash when we use an actual api and not github gists...
     @GET("position_{id}")
-    fun getPositionById(@Path("id") id: String): Single<Position>
+    fun getPositionById(@Path("id") id: String): Deferred<Position>
 
     @GET("submissions")
     fun getAllSubmissions(): Deferred<List<Submission>>

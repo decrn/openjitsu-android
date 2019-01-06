@@ -21,4 +21,7 @@ interface Dao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSubmissions(items: List<Submission>)
+
+    @Query("select * from positions where id = :id LIMIT 1")
+    fun getPositionById(id: String): Position
 }

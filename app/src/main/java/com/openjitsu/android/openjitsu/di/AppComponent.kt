@@ -2,11 +2,9 @@ package com.openjitsu.android.openjitsu.di
 
 import android.app.Application
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
+import com.openjitsu.android.openjitsu.data.repositories.Repository
 import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
-import com.openjitsu.android.openjitsu.di.modules.ApiModule
-import com.openjitsu.android.openjitsu.di.modules.AppModule
-import com.openjitsu.android.openjitsu.di.modules.DatabaseModule
-import com.openjitsu.android.openjitsu.di.modules.NetModule
+import com.openjitsu.android.openjitsu.di.modules.*
 import com.openjitsu.android.openjitsu.ui.explore.ExploreDetailActivity
 import com.openjitsu.android.openjitsu.ui.explore.ExploreItemRecyclerViewAdapter
 import com.openjitsu.android.openjitsu.ui.explore.ExploreListActivity
@@ -18,7 +16,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApiModule::class, NetModule::class, AppModule::class])
+@Component(modules = [NetModule::class, AppModule::class, DataModule::class])
 interface AppComponent {
 
     fun inject(exploreItemRecyclerViewAdapter: ExploreItemRecyclerViewAdapter)
@@ -44,9 +42,8 @@ interface AppComponent {
             return DaggerAppComponent
                     .builder()
                     .appModule(AppModule(app))
-                    .apiModule(ApiModule())
                     .netModule(NetModule(baseUrl))
-                    .databaseModule(DatabaseModule())
+                    .dataModule(DataModule())
                     .build()
         }
     }

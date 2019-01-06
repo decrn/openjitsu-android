@@ -3,13 +3,12 @@ package com.openjitsu.android.openjitsu.di
 import android.app.Application
 import com.openjitsu.android.openjitsu.data.repositories.CommentRepository
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
-import com.openjitsu.android.openjitsu.data.repositories.Repository
 import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import com.openjitsu.android.openjitsu.di.modules.*
 import com.openjitsu.android.openjitsu.ui.explore.ExploreDetailActivity
 import com.openjitsu.android.openjitsu.ui.explore.ExploreItemRecyclerViewAdapter
 import com.openjitsu.android.openjitsu.ui.explore.ExploreListActivity
-import com.openjitsu.android.openjitsu.ui.explore.ProfileFragment
+import com.openjitsu.android.openjitsu.ui.user.ProfileFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentRecyclerViewAdapter
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment

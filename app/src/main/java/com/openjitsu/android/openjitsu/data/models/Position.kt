@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey
 data class Position(
         @PrimaryKey override val id: String,
         override val name: String,
+        override val type: String,
         override val description: String,
         override val image: String,
         override val content: String
@@ -21,6 +22,7 @@ data class Position(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+            parcel.readString(),
         parcel.readString(),
         parcel.readString()
 //            parcel.readString()
@@ -30,6 +32,7 @@ data class Position(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
         parcel.writeString(name)
+        parcel.writeString(type)
         parcel.writeString(description)
         parcel.writeString(image)
         parcel.writeString(content)

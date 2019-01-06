@@ -6,9 +6,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 
-@Module(includes = [DatabaseModule::class])
+@Module(includes = [DataModule::class])
 class AppModule(private val application: Application) {
 
     @Provides
@@ -21,6 +23,12 @@ class AppModule(private val application: Application) {
     @Provides
     fun provideSharedPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences("openjitsu", Activity.MODE_PRIVATE)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMainCoroutineScope(): CoroutineScope {
+        return CoroutineScope(Dispatchers.Main)
     }
 
 

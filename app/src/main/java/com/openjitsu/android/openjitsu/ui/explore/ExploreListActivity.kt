@@ -31,10 +31,10 @@ import javax.inject.Inject
 class ExploreListActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var api : Api
+    lateinit var positionRepository: PositionRepository
 
     @Inject
-    lateinit var positionRepository: PositionRepository
+    lateinit var coroutineScope: CoroutineScope
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -75,7 +75,7 @@ class ExploreListActivity : AppCompatActivity() {
         val adapter = ExploreItemRecyclerViewAdapter(this, emptyList(), this.twoPane)
         Application.appComponent.inject(adapter)
 
-        CoroutineScope(Dispatchers.Main).launch {
+        coroutineScope.launch {
             val items = withContext(Dispatchers.IO) {
                 positionRepository.getAllPositions()
             }

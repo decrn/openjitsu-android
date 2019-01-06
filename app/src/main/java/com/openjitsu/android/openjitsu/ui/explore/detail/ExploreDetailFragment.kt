@@ -9,9 +9,15 @@ import android.view.ViewGroup
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
 import com.openjitsu.android.openjitsu.data.network.Api
+import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
+import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.explore_detail.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -23,7 +29,10 @@ import javax.inject.Inject
 class ExploreDetailFragment : Fragment() {
 
     @Inject
-    lateinit var api : Api
+    lateinit var positionRepository: PositionRepository
+
+    @Inject
+    lateinit var coroutineScope: CoroutineScope
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Application.appComponent.inject(this)
@@ -37,20 +46,17 @@ class ExploreDetailFragment : Fragment() {
 
         arguments?.let {
             if (it.containsKey(ARG_ITEM_ID)) {
+                val id = it.getString(ARG_ITEM_ID) ?: "-1"
                 Log.i("data", "ARG_ITEM_ID " + it.getString(ARG_ITEM_ID))
-                api.getPositionById(it.getString(ARG_ITEM_ID))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                { pos ->
-                                    Log.i("data", "Successfully loaded data")
-                                    rootView.explore_detail.text = pos.content
-                                },
-                                {
-                                    Log.e("data", "Failed to load data")
-                                    // Catch error
-                                }
-                        )
+
+                coroutineScope.launch {
+                    val item = withContext(Dispatchers.IO) {
+                        positionRepository.getPositionById(id)
+                    }
+                    item.run {
+                        rootView.explore_detail.text = item.content
+                    }
+                }
             }
         }
 

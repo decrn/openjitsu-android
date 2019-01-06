@@ -22,7 +22,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/explore_list"
         android:name="com.openjitsu.android.openjitsu.ui.explore.ExploreListFragment"
-        android:layout_width="@dimen/item_width"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

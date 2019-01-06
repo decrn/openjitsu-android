@@ -42,7 +42,6 @@
         </activity>
         <activity
             android:name=".ui.explore.ExploreDetailActivity"
-            android:label="@string/title_explore_detail"
             android:parentActivityName=".ui.explore.ExploreListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

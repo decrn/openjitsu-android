@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.openjitsu.android.openjitsu.R
 import com.openjitsu.android.openjitsu.data.models.ExploreItem
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
@@ -37,6 +38,7 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
                 val fragment = ExploreDetailFragment().apply {
                     arguments = Bundle().apply {
                         putString(ExploreDetailFragment.ARG_ITEM_ID, item.id)
+                        putString(ExploreDetailFragment.ARG_ITEM_NAME, item.name)
                     }
                 }
                 parentActivity.supportFragmentManager
@@ -46,6 +48,7 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
             } else { // open a seperate activity with the detail fragment
                 val intent = Intent(v.context, ExploreDetailActivity::class.java).apply {
                     putExtra(ExploreDetailFragment.ARG_ITEM_ID, item.id)
+                    putExtra(ExploreDetailFragment.ARG_ITEM_NAME, item.name)
                 }
                 v.context.startActivity(intent)
             }
@@ -56,6 +59,7 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
         val item = values[position]
         holder.nameView.text = item.name
         holder.descriptionView.text = item.description
+        holder.typeView.text = item.type
 
         Glide.with(parentActivity)
                 .load(item.image)
@@ -93,5 +97,6 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
         val nameView: TextView = view.name
         val descriptionView: TextView = view.description
         val thumbView: AppCompatImageView = view.thumbnail
+        val typeView: Chip = view.type
     }
 }

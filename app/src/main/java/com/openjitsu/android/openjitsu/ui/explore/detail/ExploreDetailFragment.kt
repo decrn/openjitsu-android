@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
@@ -16,8 +17,6 @@ import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import com.openjitsu.android.openjitsu.data.repositories.SubmissionRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_explore_detail.view.*
-import kotlinx.android.synthetic.main.explore_detail.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,20 +48,27 @@ class ExploreDetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.explore_detail, container, false)
 
-
         arguments?.let {
+            if (it.containsKey(ARG_ITEM_NAME)) {
+                this.listener!!.setTitle(it.getString(ARG_ITEM_NAME)!!)
+            }
             if (it.containsKey(ARG_ITEM_ID)) {
                 val id = it.getString(ARG_ITEM_ID) ?: "-1"
                 Log.i("data", "ARG_ITEM_ID " + it.getString(ARG_ITEM_ID))
 
+                /*
+                 * Launch a new CoRoutine on a seperate thread to handle passing the data
+                 * retrieved from the Repository to the adapter
+                 */
                 coroutineScope.launch {
                     val item = withContext(Dispatchers.IO) {
                         positionRepository.getPositionById(id)
                     }
                     item.run {
-                        listener!!.setTitle(item.name)
-                        rootView.introduction.text = item.description
-                        rootView.content.text = item.content
+                        rootView.findViewById<TextView>(R.id.introduction).text = item.description
+                        rootView.findViewById<TextView>(R.id.content).text = item.content
+//                        rootView.introduction.text = item.description
+//                        rootView.content.text = item.content
                     }
                 }
             }
@@ -95,5 +101,6 @@ class ExploreDetailFragment : Fragment() {
          * represents.
          */
         const val ARG_ITEM_ID = "item_id"
+        const val ARG_ITEM_NAME = "item_name"
     }
 }

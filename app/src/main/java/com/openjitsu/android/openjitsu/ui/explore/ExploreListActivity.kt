@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.content.Intent
+import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
 import com.openjitsu.android.openjitsu.ui.user.UserActivity
 
 
@@ -35,7 +36,11 @@ import com.openjitsu.android.openjitsu.ui.user.UserActivity
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class ExploreListActivity : AppCompatActivity() {
+class ExploreListActivity : AppCompatActivity(), ExploreDetailFragment.OnFragmentInteractionListener {
+
+    override fun setTitle(title: String) {
+        // do nothing, tablet doesn't have title
+    }
 
     @Inject
     lateinit var positionRepository: PositionRepository

@@ -13,6 +13,9 @@ import com.openjitsu.android.openjitsu.data.models.ExploreItem
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment.OnListFragmentInteractionListener
 
 import kotlinx.android.synthetic.main.fragment_comment.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
@@ -32,12 +35,24 @@ class CommentRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
+        holder.mUsernameView.text = item.username
+        holder.mTimestampView.text = formatDate(item.timestamp)
         holder.mContentView.text = item.content
 
         with(holder.mView) {
             tag = item
         }
+    }
+
+    // Source: https://stackoverflow.com/a/36831861
+    private fun formatDate(seconds: Int): String {
+        val sdf = SimpleDateFormat("dd/MM/yyyy' 'HH:mm:ss")
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = seconds * 1000L
+        val tz = TimeZone.getDefault()
+        sdf.timeZone = tz
+        return sdf.format(calendar.time)
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -48,7 +63,8 @@ class CommentRecyclerViewAdapter(
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
+        val mUsernameView: TextView = mView.username
+        val mTimestampView: TextView = mView.timestamp
         val mContentView: TextView = mView.content
 
         override fun toString(): String {

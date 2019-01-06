@@ -4,18 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.openjitsu.android.openjitsu.Application
 import com.openjitsu.android.openjitsu.R
-import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.data.repositories.CommentRepository
-import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
-import com.openjitsu.android.openjitsu.ui.explore.ExploreItemRecyclerViewAdapter
 import kotlinx.android.synthetic.main.explore_list.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,12 +46,16 @@ class CommentFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_comment_sheet, container, false)
 
-        val list = view.findViewById<RecyclerView>(R.id.list)
+        val list = view.findViewById<RecyclerView>(R.id.comment_list)
 
         val adapter = CommentRecyclerViewAdapter(emptyList(), listener)
         list.adapter = adapter
         Application.appComponent.inject(adapter)
 
+        /*
+         * Launch a new CoRoutine on a seperate thread to handle passing the data
+         * retrieved from the Repository to the adapter
+         */
         coroutineScope.launch {
             val items = withContext(Dispatchers.IO) {
                 val id = arguments?.getString(ExploreDetailFragment.ARG_ITEM_ID) ?: "-1"

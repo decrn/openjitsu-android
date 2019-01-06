@@ -1,20 +1,14 @@
 package com.openjitsu.android.openjitsu.ui.explore
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import com.openjitsu.android.openjitsu.R
-import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
-import kotlinx.android.synthetic.main.activity_explore_detail.*
-import com.openjitsu.android.openjitsu.R.id.toolbar
-import android.widget.TextView
-import com.openjitsu.android.openjitsu.R.id.toolbar
-
-
-
 
 
 /**
@@ -28,7 +22,7 @@ class ExploreDetailActivity : AppCompatActivity(), ExploreDetailFragment.OnFragm
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_explore_detail)
-        setSupportActionBar(detail_toolbar)
+        setSupportActionBar(findViewById(R.id.detail_toolbar))
 
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -49,6 +43,8 @@ class ExploreDetailActivity : AppCompatActivity(), ExploreDetailFragment.OnFragm
                 arguments = Bundle().apply {
                     putString(ExploreDetailFragment.ARG_ITEM_ID,
                             intent.getStringExtra(ExploreDetailFragment.ARG_ITEM_ID))
+                    putString(ExploreDetailFragment.ARG_ITEM_NAME,
+                            intent.getStringExtra(ExploreDetailFragment.ARG_ITEM_NAME))
                 }
             }
 
@@ -61,7 +57,7 @@ class ExploreDetailActivity : AppCompatActivity(), ExploreDetailFragment.OnFragm
 
             supportFragmentManager.beginTransaction()
                     .add(R.id.explore_detail_container, contentFragment)
-                    .add(R.id.comment_list, commentFragment)
+                    .add(R.id.comments_sheet, commentFragment)
                     .commit()
         }
     }
@@ -82,7 +78,9 @@ class ExploreDetailActivity : AppCompatActivity(), ExploreDetailFragment.OnFragm
             }
 
     override fun setTitle(title: String) {
-        supportActionBar!!.title = title
+        val mActionBarToolbar = findViewById<Toolbar>(R.id.detail_toolbar)
+        setSupportActionBar(mActionBarToolbar)
+        getSupportActionBar()!!.setTitle(title)
     }
 
 }

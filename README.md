@@ -16,7 +16,7 @@ The app is built as per the specifications for **Native Apps 1: Android**, and u
 
 Clone this repository and import into **Android Studio**
 ```bash
-git clone git@github.com:HoGentTIN/native-apps-1-android-creative-app-decrn.git openjitsu-android
+git clone https://github.com/decrn/openjitsu-android openjitsu-android
 ```
 
 

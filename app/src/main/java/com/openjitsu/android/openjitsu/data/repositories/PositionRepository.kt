@@ -1,27 +1,18 @@
 package com.openjitsu.android.openjitsu.data.repositories
 
-import android.content.SharedPreferences
 import android.util.Log
 import com.openjitsu.android.openjitsu.Application
-import com.openjitsu.android.openjitsu.data.db.Dao
-import com.openjitsu.android.openjitsu.data.network.Api
 import com.openjitsu.android.openjitsu.data.models.Position
+import com.openjitsu.android.openjitsu.data.network.Api
 import com.openjitsu.android.openjitsu.util.NoConnectivityException
 import javax.inject.Inject
 
-class PositionRepository @Inject constructor(private val api: Api) {
-
-    @Inject
-    lateinit var dao: Dao
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+class PositionRepository: Repository() {
 
     init {
         Application.appComponent.inject(this)
     }
 
-    // @SuppressLint("CheckResult")
     suspend fun getAllPositions(): List<Position> {
         return try {
             Log.i("openjitsu/repo", "Attempting to get from Positions Repository...")
@@ -34,6 +25,17 @@ class PositionRepository @Inject constructor(private val api: Api) {
         } catch (e: NoConnectivityException) {
             Log.i("openjitsu/repo", "No network connectivity, returning saved positions")
             dao.getAllPositions()
+        }
+    }
+
+    suspend fun getPositionById(id: String): Position {
+        return try {
+            Log.i("openjitsu/repo", "Attempting to get item id: '$id' from Positions Repository...")
+            val item = api.getPositionById(id).await()
+            item
+        } catch (e: NoConnectivityException) {
+            Log.i("openjitsu/repo", "No network connectivity, returning saved positions")
+            dao.getPositionById(id)
         }
     }
 }

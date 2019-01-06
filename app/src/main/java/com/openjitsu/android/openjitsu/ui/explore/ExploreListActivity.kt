@@ -1,16 +1,20 @@
 package com.openjitsu.android.openjitsu.ui.explore
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.widget.SearchView
 import com.openjitsu.android.openjitsu.R
-import com.openjitsu.android.openjitsu.data.network.Api
 
 import kotlinx.android.synthetic.main.activity_explore_list.*
 import kotlinx.android.synthetic.main.explore_list.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.openjitsu.android.openjitsu.Application
+import com.openjitsu.android.openjitsu.data.models.ExploreItem
 import com.openjitsu.android.openjitsu.data.repositories.PositionRepository
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
@@ -18,6 +22,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.content.Intent
+import com.openjitsu.android.openjitsu.ui.user.UserActivity
 
 
 /**
@@ -86,4 +93,41 @@ class ExploreListActivity : AppCompatActivity() {
     fun onClose() {
         compositeDisposable.dispose()
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.bottom_nav, menu)
+
+        // Get the SearchView and set the searchable configuration
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu?.findItem(R.id.action_search)?.actionView as SearchView).apply {
+            // Assumes current activity is the searchable activity
+            setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            // setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
+            maxWidth = Integer.MAX_VALUE
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    (explore_list.adapter as ExploreItemRecyclerViewAdapter).filter(query ?: "")
+                    return false
+                }
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    // filter recycler view when text is changed
+                    (explore_list.adapter as ExploreItemRecyclerViewAdapter).filter(query ?: "")
+                    return false
+                }
+            })
+        }
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_profile -> startActivity(Intent(this, UserActivity::class.java))
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 }

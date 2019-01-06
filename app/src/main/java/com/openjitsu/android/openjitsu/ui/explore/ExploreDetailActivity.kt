@@ -9,6 +9,13 @@ import com.openjitsu.android.openjitsu.data.models.Comment
 import com.openjitsu.android.openjitsu.ui.explore.detail.CommentFragment
 import com.openjitsu.android.openjitsu.ui.explore.detail.ExploreDetailFragment
 import kotlinx.android.synthetic.main.activity_explore_detail.*
+import com.openjitsu.android.openjitsu.R.id.toolbar
+import android.widget.TextView
+import com.openjitsu.android.openjitsu.R.id.toolbar
+
+
+
+
 
 /**
  * An activity representing a single Explore detail screen. This
@@ -16,10 +23,7 @@ import kotlinx.android.synthetic.main.activity_explore_detail.*
  * item details are presented side-by-side with a list of items
  * in a [ExploreListActivity].
  */
-class ExploreDetailActivity : AppCompatActivity(), CommentFragment.OnListFragmentInteractionListener {
-    override fun onListFragmentInteraction(item: Comment?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class ExploreDetailActivity : AppCompatActivity(), ExploreDetailFragment.OnFragmentInteractionListener, CommentFragment.OnListFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,4 +80,9 @@ class ExploreDetailActivity : AppCompatActivity(), CommentFragment.OnListFragmen
                 }
                 else -> super.onOptionsItemSelected(item)
             }
+
+    override fun setTitle(title: String) {
+        supportActionBar!!.title = title
+    }
+
 }

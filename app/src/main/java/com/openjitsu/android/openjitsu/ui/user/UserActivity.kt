@@ -8,15 +8,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 
-class UserActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener {
-    override fun onFragmentInteraction(uri: Uri) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class UserActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionListener, RegisterFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportFragmentManager.beginTransaction().replace(android.R.id.content, RegisterFragment()).commit()
+        showLoginFragment()
 
         // make status bar transparent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -38,4 +35,17 @@ class UserActivity : AppCompatActivity(), LoginFragment.OnFragmentInteractionLis
         }
         win.attributes = winParams
     }
+
+    override fun showLoginFragment() {
+        supportFragmentManager.beginTransaction().replace(android.R.id.content, LoginFragment()).commit()
+    }
+
+    override fun showRegisterFragment() {
+        supportFragmentManager.beginTransaction().replace(android.R.id.content, RegisterFragment()).commit()
+    }
+
+    override fun showProfileFragment() {
+        supportFragmentManager.beginTransaction().replace(android.R.id.content, ProfileFragment()).commit()
+    }
+
 }

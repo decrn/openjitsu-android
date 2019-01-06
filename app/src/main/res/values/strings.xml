@@ -32,4 +32,7 @@
     <string name="menu_explore">Explore</string>
     <string name="menu_profile">Profile</string>
     <string name="appbar_bottom_sheet_behavior">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
+    <string name="menu_search">Search</string>
+    <string name="search_hint">Enter a name or category</string>
+    <string name="register_show_login_button">Existing</string>
 </resources>

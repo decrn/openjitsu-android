@@ -1,5 +1,6 @@
 package com.openjitsu.android.openjitsu.ui.explore.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,6 +38,8 @@ class ExploreDetailFragment : Fragment() {
     @Inject
     lateinit var coroutineScope: CoroutineScope
 
+    private var listener: ExploreDetailFragment.OnFragmentInteractionListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Application.appComponent.inject(this)
         super.onCreate(savedInstanceState)
@@ -57,6 +60,7 @@ class ExploreDetailFragment : Fragment() {
                         positionRepository.getPositionById(id)
                     }
                     item.run {
+                        listener!!.setTitle(item.name)
                         rootView.introduction.text = item.description
                         rootView.content.text = item.content
                     }
@@ -65,6 +69,24 @@ class ExploreDetailFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ExploreDetailFragment.OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    interface OnFragmentInteractionListener {
+        fun setTitle(title: String)
     }
 
     companion object {

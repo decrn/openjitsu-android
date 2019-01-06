@@ -21,19 +21,8 @@ import kotlinx.android.synthetic.main.fragment_comment.view.*
  */
 class CommentRecyclerViewAdapter(
         private var mValues: List<Comment>,
-        private val mListener: OnListFragmentInteractionListener?)
+        private val mListener: CommentFragment.OnListFragmentInteractionListener?)
     : RecyclerView.Adapter<CommentRecyclerViewAdapter.ViewHolder>() {
-
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Comment
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -48,7 +37,6 @@ class CommentRecyclerViewAdapter(
 
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
         }
     }
 

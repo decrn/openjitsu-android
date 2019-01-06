@@ -27,8 +27,10 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
      * on a specific item view, so that recycled views don't leave behind old listeners.
      */
     private val onClickListener: View.OnClickListener
+    private var allItems: List<ExploreItem>? = null
 
     init {
+        allItems = values
         onClickListener = View.OnClickListener { v ->
             val item = v.tag as ExploreItem
             if (twoPane) { // show detail fragment on seperate container in current activity
@@ -74,7 +76,16 @@ class ExploreItemRecyclerViewAdapter(private val parentActivity: ExploreListActi
     override fun getItemCount() = values.size
 
     fun replaceItems(exploreList: List<ExploreItem>) {
+        this.allItems = exploreList
         this.values = exploreList
+        this.notifyDataSetChanged()
+    }
+
+    fun filter(query: String = "") {
+        this.values = allItems!!.filter { i ->
+            i.name.toLowerCase().contains(query.toLowerCase())
+                || i.type.toLowerCase().contains(query.toLowerCase())
+        }
         this.notifyDataSetChanged()
     }
 

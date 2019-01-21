@@ -2,7 +2,7 @@
 
 OpenJitsu is an open-source, user-driven platform for learning Brazilian Jiu-Jitsu. It offers users an intuitive app that breaks down key positions into submisssions and defenses, allowing beginners to quickly grasp concepts like Mount, Guard and Side Control, as well as advanced break downs, historical information and instructional step-by-steps for specific moves that appeal to more advanced practitioners.
 
-The app is built as per the specifications for **Native Apps 1: Android**, and uses the bleeding edge *Jetpack AndroidX component libraries* to present a modern and clean [Google Material Design 2.0](https://material.io/design)-conform look and feel with several other frameworks and libraries under the hood:
+The app uses the bleeding edge *Jetpack AndroidX component libraries* to present a modern and clean [Google Material Design 2.0](https://material.io/design)-conform look and feel with several other frameworks and libraries under the hood:
 
 * **RxJava**, **RxKotlin** and **RxAndroid** for better async and observables
 * **Glide** for image loading and caching
@@ -10,6 +10,13 @@ The app is built as per the specifications for **Native Apps 1: Android**, and u
 * **Retrofit2** with the **OkHttp3** client for HTTP/network functionality
 * **Room2** for local persistence
 * **Espresso** for instrumented e2e testing
+
+### Screenshots
+
+![Login view](/showcase/login.png)
+![Master view](/showcase/master.png)
+![Detail view](/showcase/detail.png)
+![Comments view](/showcase/comments.png)
 
 ## Installation
 
